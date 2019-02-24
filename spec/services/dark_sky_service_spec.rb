@@ -17,7 +17,7 @@ describe 'with a city & state' do
     expect(forecast[:currently][:temperature]).to eq(temerpature)
   end
 
-  it 'can send back a different lat long', :vcr do
+  it 'can send back current_weather for different city', :vcr do
     city = 'littleton,co'
     latitude = 39.613321
     longitude = -105.0166498
