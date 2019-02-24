@@ -1,11 +1,7 @@
 class FlickrService
-  def self.photo_search(city)
-    geocode = GoogleGeocodeService.new(city)
-    get_json("/services/rest/?api_key=#{key}&method=flickr.photos.search&tags=landscape&safe_search=1&sort=relevance&lat=#{geocode.latitude}&lon=#{geocode.longitude}&format=json&nojsoncallback=true")
-  end
-
   def self.single_photo(city)
-    @element = photo_search(city)[:photos][:photo][0]
+    json = JSON.parse(self.photo_search_response(city).body, symbolize_names: true)
+    @element = json[:photos][:photo][0]
   end
 
   def self.photo_url
@@ -24,8 +20,19 @@ class FlickrService
     end
   end
 
-  def self.get_json(path)
-    response = conn.get(path)
-    JSON.parse(response.body, symbolize_names: true)
+  def self.photo_search_response(city)
+    geocode = GoogleGeocodeService.new(city)
+    conn.get do |req|
+      req.url("/services/rest/")
+      req.params["api_key"] = key
+      req.params["method"] = "flickr.photos.search"
+      req.params["tags"] = "landscape"
+      req.params["safe_search"] = 1
+      req.params["sort"] = "relevance"
+      req.params["lat"] = geocode.latitude
+      req.params["lon"] = geocode.longitude
+      req.params["format"] = "json"
+      req.params["nojsoncallback"] = "true"
+    end
   end
 end
