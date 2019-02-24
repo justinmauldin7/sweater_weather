@@ -5,7 +5,7 @@ describe 'with a city & state' do
     city = 'denver,co'
     latitude = 39.7392358
     longitude = -104.990251
-    temerpature = 36.78
+    temerpature = 31.59
     keys = [:latitude, :longitude, :timezone, :currently,
             :minutely, :hourly, :daily, :flags, :offset]
 
@@ -21,7 +21,7 @@ describe 'with a city & state' do
     city = 'littleton,co'
     latitude = 39.613321
     longitude = -105.0166498
-    temerpature = 36.5
+    temerpature = 30.64
 
     forecast = DarkSkyService.forecast(city)
 
