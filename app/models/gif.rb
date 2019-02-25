@@ -1,10 +1,9 @@
 class Gif
   attr_reader :copyright
 
-  def initialize(weather_data, location)
+  def initialize(weather_data)
     @copyright = Time.now.strftime('%Y')
     @daily_weather_data = weather_data
-    @location = location
   end
 
   def images
