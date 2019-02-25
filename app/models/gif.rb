@@ -13,13 +13,17 @@ class Gif
     end
   end
 
+  def url
+    GiphyService.new(@location)
+  end
+
   private
 
   def daily_image(index)
     {
       time: @daily_weather_data[:daily][:data][index][:time].to_s,
       summary: @daily_weather_data[:daily][:data][index][:summary],
-      url: "url"
+      url: url
     }
   end
 end
