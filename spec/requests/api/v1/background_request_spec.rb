@@ -6,7 +6,7 @@ describe 'Background API' do
     attribute_keys = ["city", "state", "photo_id", "photo_secret",
                       "photo_server", "photo_farm", "photo_title", "photo_url"]
 
-    get "/api/v1/backgrounds?location=#{city}"
+    get "/api/v1/backgrounds?location=#{city}" 
 
     expect(response).to be_successful
 
