@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
                      password_confirmation: user_params[:password_confirmation],
                      api_key: api_key)
     if user.save
-      render json: UserSerializer.new(user)  
+      render json: UserSerializer.new(user), status: 201
     end
   end
 
