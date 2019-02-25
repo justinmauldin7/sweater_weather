@@ -40,6 +40,7 @@ gem 'faraday'
 gem 'launchy'
 gem 'fast_jsonapi'
 gem 'figaro'
+gem 'fast_jsonapi'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
