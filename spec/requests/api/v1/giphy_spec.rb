@@ -5,7 +5,7 @@ describe 'Giphy API' do
     city = 'denver,co'
     time = "1551078000"
     summary = "Mostly cloudy until evening."
-    url = "<GIPHY_URL_GOES_HERE>"
+    url = "https://media0.giphy.com/media/YdUdx8jPIKhxe/200w.gif"
     days = 6
     attribute_keys = ["copyright", "images"]
     image_keys = ["time", "summary", "url"]
