@@ -1,4 +1,6 @@
 class GiphyService
+  attr_reader :giphy_search_term
+  
   def initialize(summary)
     @giphy_search_term = shorten_summary(summary)
   end
