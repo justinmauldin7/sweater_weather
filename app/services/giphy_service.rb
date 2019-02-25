@@ -1,19 +1,34 @@
 class GiphyService
-  def self.key
+  def initialize(summary)
+    @giphy_search_term = get_short_summary(summary)
+  end
+
+  def single_giphy
+    json = JSON.parse(giphy_search_response.body, symbolize_names: true)
+    binding.pry
+    @element = json[:data][0][:images][:fixed_width][:url]
+  end
+
+  def get_short_summary(summary)
+    short_summary = summary.split(" ")
+    "#{short_summary[0]} #{short_summary[1]}"
+  end
+
+  def key
     ENV['GIPHY_API_KEY']
   end
 
-  def self.conn
+  def conn
     Faraday.new(:url => 'https://api.giphy.com') do |faraday|
       faraday.adapter  Faraday.default_adapter
     end
   end
 
-  def self.giphy_search_response(city)
+  def giphy_search_response
     conn.get do |req|
       req.url("/v1/gifs/search")
       req.params["api_key"] = key
-      req.params["q"] = city
+      req.params["q"] = @giphy_search_term
       req.params["limit"] = 4
       req.params["rating"] = "g"
       req.params["lang"] = "en"
