@@ -14,7 +14,7 @@ class Gif
   end
 
   def url(summary)
-    GiphyService.new(summary).single_giphy
+    GiphyService.new(summary).single_giphy_url
   end
 
   private
