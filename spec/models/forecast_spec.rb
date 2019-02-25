@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Forecast do
   describe 'instance variables' do
-    xit 'has attributes', :vcr do
+    it 'has attributes', :vcr do
       location = "denver, co"
       city = "Denver"
       state = " CO"
-      date = "02/24"
-      time = "11:32 PM"
+      date = Time.now.strftime('%m/%d')
+      time = Time.now.strftime('%l:%M %p')
       weather_data = DarkSkyService.forecast(location)
       forecast = Forecast.new(weather_data, location)
 
