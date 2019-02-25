@@ -6,8 +6,8 @@ describe 'Giphy API' do
     time = "1541487600",
     summary = "Mostly sunny in the morning.",
     url = "<GIPHY_URL_GOES_HERE>"
-    giphy_count = 3
-    image_keys = ["city", "state"]
+    days = 6
+    image_keys = ["time", "summary", "url"]
 
     get "/api/v1/gifs?location=#{city}"
 
@@ -15,7 +15,7 @@ describe 'Giphy API' do
 
     giphy = JSON.parse(response.body)
 
-    expect(giphy["data"]["attributes"]["image"].count).to eq(giphy_count)
+    expect(giphy["data"]["attributes"]["image"].count).to eq(days)
     expect(giphy["data"]["attributes"]["image"][0].keys).to eq(image_keys)
     expect(giphy["data"]["attributes"]["image"][0]["time"]).to eq(time)
     expect(giphy["data"]["attributes"]["image"][0]["summary"]).to eq(summary)
