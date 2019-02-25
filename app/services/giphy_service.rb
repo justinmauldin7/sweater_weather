@@ -1,15 +1,15 @@
 class GiphyService
   def initialize(summary)
-    @giphy_search_term = get_short_summary(summary)
+    @giphy_search_term = shorten_summary(summary)
   end
 
-  def single_giphy
-    json = JSON.parse(giphy_search_response.body, symbolize_names: true)
-    binding.pry
-    @element = json[:data][0][:images][:fixed_width][:url]
+  def single_giphy_url
+    JSON.parse(giphy_search_response.body, symbolize_names: true)[:data][0][:images][:fixed_width][:url]
   end
 
-  def get_short_summary(summary)
+  private
+
+  def shorten_summary(summary)
     short_summary = summary.split(" ")
     "#{short_summary[0]} #{short_summary[1]}"
   end
