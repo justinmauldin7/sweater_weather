@@ -1,15 +1,10 @@
 class Gif
-  attr_reader :city,
-              :state,
-              :date
+  attr_reader :copyright
 
   def initialize(weather_data, location)
-    @city = location.split(",")[0].capitalize
-    @state =location.split(",")[1].upcase
-
-    @date = Time.now.strftime('%m/%d')
-
+    @copyright = Time.now.strftime('%Y')
     @daily_weather_data = weather_data
+    @location = location
   end
 
   def images
@@ -22,7 +17,7 @@ class Gif
 
   def daily_image(index)
     {
-      time: @daily_weather_data[:daily][:data][index][:time],
+      time: @daily_weather_data[:daily][:data][index][:time].to_s,
       summary: @daily_weather_data[:daily][:data][index][:summary],
       url: "url"
     }
