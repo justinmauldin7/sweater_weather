@@ -20,4 +20,19 @@ describe 'Sessions API' do
     expect(user['data']['attributes']['api_key'].length).to eq(api_key_length)
 
   end
+
+  it 'does create session if password is bad', :vcr do
+    email = "whatever@example.com"
+    password = "password"
+    bad_password = "password111"
+    ok_status = 200
+    unauthorized_status = 401
+
+    post "/api/v1/users?email=#{email}&password=#{password}&password_confirmation=#{password}"
+
+    post "/api/v1/sessions?email=#{email}&password=#{bad_password}"
+
+    expect(response.status).to eq(unauthorized_status)
+    expect(response.status).to_not eq(ok_status)
+  end
 end
