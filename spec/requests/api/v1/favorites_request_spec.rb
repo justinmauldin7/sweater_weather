@@ -37,4 +37,33 @@ describe 'Favorites API' do
     expect(response.status).to eq(unauthorized_status)
     expect(response).to_not be_successful
   end
+
+  it 'returns list of locations for a user & the current weather' do
+    email = "whatever@example.com"
+    password = "password"
+    city_1 = "denver,co"
+    city_2 = "san diego,ca"
+    city_3 = "dallas,tx"
+    api_key = "bfab8768f6a1932d68655e47699ce3"
+    unauthorized_status = 401
+
+    user = User.create(email: email, password: password, password_confirmation: password, api_key: api_key)
+
+    post "/api/v1/sessions?email=#{user.email}&password=#{user.password}"
+    post "/api/v1/favorites?location=#{city_1}&api_key=#{api_key}"
+    post "/api/v1/favorites?location=#{city_2}&api_key=#{api_key}"
+    post "/api/v1/favorites?location=#{city_3}&api_key=#{api_key}"
+    get "/api/v1/favorites?api_key=#{api_key}"
+
+
+    expect(response).to be_successful
+    expect(response.status).to_not eq(unauthorized_status)
+
+    favorite = JSON.parse(response.body)
+
+    expect(favorite['data']['attributes']['api_key']).to eq(api_key)
+    expect(favorite['data']['attributes'][0]['location']).to eq(city_1)
+    expect(favorite['data']['attributes'][1]['location']).to eq(city_2)
+    expect(favorite['data']['attributes'][2]['location']).to eq(city_3)
+  end
 end
