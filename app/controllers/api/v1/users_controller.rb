@@ -7,6 +7,8 @@ class Api::V1::UsersController < ApplicationController
                      api_key: api_key)
     if user.save
       render json: UserSerializer.new(user), status: 201
+    else
+      render json: {}, status: 401
     end
   end
 
