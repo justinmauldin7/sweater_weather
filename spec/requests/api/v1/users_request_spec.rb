@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Users API' do
-  it 'returns registered user with api_key', :vcr do
+  it 'creates registered user with api_key', :vcr do
     email = "whatever@example.com"
     password = "password"
     password_confirmation = "password"
