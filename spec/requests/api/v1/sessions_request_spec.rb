@@ -21,7 +21,7 @@ describe 'Sessions API' do
 
   end
 
-  it 'does create session if password is bad', :vcr do
+  it 'does not create session if password is bad', :vcr do
     email = "whatever@example.com"
     password = "password"
     bad_password = "password111"

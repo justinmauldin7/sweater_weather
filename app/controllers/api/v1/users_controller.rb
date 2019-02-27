@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: UserSerializer.new(user), status: 201
     else
-      render json: {}, status: 401
+      render json: {error: "401 Unauthorized"}, status: 401
     end
   end
 
