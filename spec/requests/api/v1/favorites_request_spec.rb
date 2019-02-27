@@ -7,6 +7,7 @@ describe 'Favorites API' do
     city = "denver,co"
     api_key = "bfab8768f6a1932d68655e47699ce3"
     unauthorized_status = 401
+    success_response = "200 OK"
 
     user = User.create(email: email, password: password, password_confirmation: password, api_key: api_key)
 
@@ -18,8 +19,7 @@ describe 'Favorites API' do
 
     favorite = JSON.parse(response.body)
 
-    expect(favorite['data']['attributes']['api_key']).to eq(api_key)
-    expect(favorite['data']['attributes']['location']).to eq(city)
+    expect(favorite['success']).to eq(success_response)
   end
 
   it 'does not create favorite if password is bad', :vcr do
@@ -38,7 +38,7 @@ describe 'Favorites API' do
     expect(response).to_not be_successful
   end
 
-  it 'returns list of locations for a user & the current weather' do
+  it 'returns list of locations for a user & the current weather', :vcr do
     email = "whatever@example.com"
     password = "password"
     city_1 = "denver,co"
@@ -61,9 +61,27 @@ describe 'Favorites API' do
 
     favorite = JSON.parse(response.body)
 
-    expect(favorite['data']['attributes']['api_key']).to eq(api_key)
-    expect(favorite['data']['attributes'][0]['location']).to eq(city_1)
-    expect(favorite['data']['attributes'][1]['location']).to eq(city_2)
-    expect(favorite['data']['attributes'][2]['location']).to eq(city_3)
+    expect(favorite['data'][0]['attributes']['location']).to eq(city_1)
+    expect(favorite['data'][0]['attributes']).to have_key('current_weather')
+    expect(favorite['data'][1]['attributes']['location']).to eq(city_2)
+    expect(favorite['data'][1]['attributes']).to have_key('current_weather')
+    expect(favorite['data'][2]['attributes']['location']).to eq(city_3)
+    expect(favorite['data'][2]['attributes']).to have_key('current_weather')
+  end
+
+  it 'renders 401 if user does not have any favorites', :vcr do
+    email = "whatever@example.com"
+    password = "password"
+    api_key = "bfab8768f6a1932d68655e47699ce3"
+    unauthorized_status = 401
+
+    user = User.create(email: email, password: password, password_confirmation: password, api_key: api_key)
+
+    post "/api/v1/sessions?email=#{user.email}&password=#{user.password}"
+    get "/api/v1/favorites?api_key=#{api_key}"
+
+
+    expect(response.status).to eq(unauthorized_status)
+    expect(response).to_not be_successful
   end
 end
