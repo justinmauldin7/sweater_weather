@@ -4,6 +4,10 @@ class DarkSkyService
     get_json("/forecast/#{key}/#{geocode.latitude},#{geocode.longitude}")
   end
 
+  def self.cached_forecast(latitude, longitude)
+    get_json("/forecast/#{key}/#{latitude},#{longitude}")
+  end
+
   private
 
   def self.key

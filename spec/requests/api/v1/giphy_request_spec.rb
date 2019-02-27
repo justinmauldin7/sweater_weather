@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'Giphy API' do
   it 'returns giphy related to the current weather', :vcr do
     city = 'denver,co'
-    time = "1551078000"
-    summary = "Mostly cloudy until evening."
-    url = "https://media0.giphy.com/media/YdUdx8jPIKhxe/200w.gif"
+    time = "1551250800"
+    summary = "Mostly cloudy throughout the day."
+    url = "https://media2.giphy.com/media/HoUgegTjteXCw/200w.gif"
     days = 6
     attribute_keys = ["copyright", "images"]
     image_keys = ["time", "summary", "url"]

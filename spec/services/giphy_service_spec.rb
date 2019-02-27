@@ -12,7 +12,7 @@ describe 'with weather summary' do
 
   it 'can send back a giphy url', :vcr do
     summary = "Mostly cloudy until evening."
-    url = "https://media0.giphy.com/media/YdUdx8jPIKhxe/200w.gif"
+    url = "https://media2.giphy.com/media/HoUgegTjteXCw/200w.gif"
 
     giphy_url = GiphyService.new(summary).single_giphy_url
 

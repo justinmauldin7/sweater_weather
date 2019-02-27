@@ -24,13 +24,13 @@ describe Forecast do
       @hours = 8
       @days = 6
 
-      @current_weather = {:icon=>"Partly Cloudy",
-                         :temperature=>25,
-                         :feels_like=>19,
-                         :humidity=>0.63,
-                         :visibility=>10,
-                         :uv_index=>0,
-                         :summary=>"Light snow (1–4 in.) on Friday and Saturday, with high temperatures peaking at 56°F on Tuesday."}
+      @current_weather = {:icon=>"Mostly Cloudy",
+                         :temperature=>27,
+                         :feels_like=>22,
+                         :humidity=>0.74,
+                         :visibility=>7.76,
+                         :uv_index=>4,
+                         :summary=>"Snow (4–8 in.) over the weekend, with high temperatures falling to 18°F on Sunday."}
       @weather_data = DarkSkyService.forecast(@location)
       @forecast = Forecast.new(@weather_data, @location)
 

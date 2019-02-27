@@ -10,7 +10,7 @@ describe Favorite do
   end
 
   describe 'instance methods' do
-    it "can return its user's api key" do
+    it "can return its user's api key", :vcr do
       email = "whatever@example.com"
       password = "password"
       api_key = "2017e35f6a05da1db87865129db345"
