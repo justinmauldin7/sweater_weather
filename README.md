@@ -55,6 +55,12 @@ GET /api/v1/backgrounds?location=denver,co
 ```
 
 
+##### Get gif for a location
+```
+GET /api/v1/gifs?location=denver,co
+```
+
+
 ##### Crete a user
 ```
 POST /api/v1/users?email=email@email.com&password=#password&confirm_password=#password
@@ -63,26 +69,26 @@ POST /api/v1/users?email=email@email.com&password=#password&confirm_password=#pa
 
 ##### Sign-in as a user
 ```
-POST /api/v1/sessions?email=email@email.com&password=#password
+POST /api/v1/sessions?email=email@email.com&password=password
 ```
 
 
 ##### Create a favorite location for a user
 ```
-POST /api/v1/favorites?location=#denver,co&api_key=asdlk32kljas3343
+POST /api/v1/favorites?location=denver,co&api_key=asdlk32kljas3343
 ```
 
 
 ##### Show all favorite locations for a user
 ```
-GET /api/v1/favorites?api_key=#asdlk32kljas3343
+GET /api/v1/favorites?api_key=asdlk32kljas3343
 ```
 
 
 ##### Delete a favorite location for a user
 
 ```
-DELETE /api/v1/favorites?location=#denver,co&api_key=#asdlk32kljas3343
+DELETE /api/v1/favorites?location=denver,co&api_key=asdlk32kljas3343
 ```
 
 
