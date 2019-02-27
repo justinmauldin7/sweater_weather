@@ -5,4 +5,8 @@ class Favorite < ApplicationRecord
   def api_key
     user.api_key
   end
+
+  def current_weather
+    DarkSkyService.forecast(self.location)[:currently]
+  end
 end

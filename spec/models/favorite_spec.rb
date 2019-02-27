@@ -23,5 +23,18 @@ describe Favorite do
       expect(favorite.location).to eq(city)
       expect(favorite_api_key).to eq(api_key)
     end
+
+    it "can return its locations current weather", :vcr do
+      email = "whatever@example.com"
+      password = "password"
+      api_key = "2017e35f6a05da1db87865129db345"
+      city = "denver,co"
+
+      user = User.create(email: email, password: password, password_confirmation: password, api_key: api_key)
+      user.favorites.create(location: city)
+      current_weather = user.favorites[0].current_weather
+
+      expect(current_weather).to have_key(:time)
+    end
   end
 end
