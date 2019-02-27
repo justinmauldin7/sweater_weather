@@ -112,7 +112,7 @@ describe 'Favorites API' do
     expect(favorite['data']['attributes']).to have_key('current_weather')
   end
 
-  it 'renders 401 if api key is not sent when trying to delete a favorite' do
+  it 'renders 401 if api key is not sent when trying to delete a favorite', :vcr do
     email = "whatever@example.com"
     password = "password"
     city_1 = "denver,co"
