@@ -257,7 +257,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
-  rack-cors (~> 0.4.0)
+  rack-cors
   rails (~> 5.2.2)
   rb-readline
   rspec-rails
